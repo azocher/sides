@@ -1,0 +1,46 @@
+@media (max-width: 400px) {
+  #menu .col:last-child {
+    display: none;
+  }
+}
+
+#menu {
+  background-color: #4286f4;
+  padding-top: 15px;
+  color: white;
+}
+
+#menu .col:last-child {
+  text-align: right;
+}
+
+ul li {
+  list-style: none;
+  display: inline;
+  padding-right: 18px;
+}
+
+ul li a {
+  color: white;
+}
+
+ #body {
+   padding-top: 20px;
+   padding-left: 15px;
+ }
+
+table {
+  border: {
+    width: 1px;
+    color: black
+    style: solid;
+  }
+}
+
+tr {
+  border: 1px black solid;
+}
+
+tr:nth-child(2n) {
+  background-color: #c4c4c4;
+}
