@@ -1,9 +1,12 @@
 import os
 
-from flask import Flask, session, render_template
+from flask import Flask, session, render_template, request
 from flask_session import Session
 from sqlalchemy import create_engine
 from sqlalchemy.orm import scoped_session, sessionmaker
+
+# personal functions
+from login import login_check
 
 app = Flask(__name__)
 
@@ -24,3 +27,17 @@ db = scoped_session(sessionmaker(bind=engine))
 @app.route("/")
 def index():
     return render_template('login.html')
+
+@app.route("/login", methods=['GET', 'POST'])
+def login():
+    if request.method == 'POST':
+        print("Posted!")
+        username = request.form.get("username")
+        password = request.form.get("password")
+        login_check(db, username, password)
+    else:
+        return render_template('login.html')
+
+@app.route("/register")
+def register():
+    return render_template('register.html')

@@ -1,7 +1,8 @@
 {% extends "index.html" %}
   {% block title %}Login{% endblock %}
   {% block content %}
-    <form method="post">
+    <h2>New to the Library? Register here.</h2>
+    <form>
       <div class="form-group">
         <label for="username">Username</label>
         <input type="username" class="form-control" placeholder="Username">
@@ -14,6 +15,6 @@
     </form>
     <br>
       <dl>
-        <dt>New to the Library? <a href="{{ url_for('register', filename='register.html') }}">Register here.</dt>
+        <dt>Already belong? <a href="{{ url_for('login', filename='login.html') }}">Login here.</dt>
       </dl>
   {% endblock %}
