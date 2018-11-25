@@ -6,7 +6,7 @@ from sqlalchemy import create_engine
 from sqlalchemy.orm import scoped_session, sessionmaker
 
 # personal functions
-from login import login_check
+from login import login_check, register_check
 
 app = Flask(__name__)
 
@@ -26,7 +26,7 @@ db = scoped_session(sessionmaker(bind=engine))
 
 @app.route("/")
 def index():
-    return render_template('login.html')
+    return render_template('main.html')
 
 @app.route("/login", methods=['GET', 'POST'])
 def login():
@@ -34,10 +34,16 @@ def login():
         print("Posted!")
         username = request.form.get("username")
         password = request.form.get("password")
-        login_check(db, username, password)
+        return login_check(db, username, password)
     else:
         return render_template('login.html')
 
-@app.route("/register")
+@app.route("/register", methods=['GET', 'POST'])
 def register():
-    return render_template('register.html')
+    if request.method == 'POST':
+        print("POSTED!")
+        username = str(request.form.get("username"))
+        password = str(request.form.get("password"))
+        return register_check(db, username, password)
+    else:
+        return render_template('register.html')

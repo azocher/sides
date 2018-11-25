@@ -8,3 +8,15 @@
 #content {
   padding-top: 20px;
 }
+
+#error {
+  padding-bottom: 15px;
+  background-color: #fc858b;
+  color: #870006;
+}
+
+#registered {
+  padding-bottom: 15px;
+  background-color: #9bd69a;
+  color: #003500;
+}

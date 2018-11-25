@@ -1,6 +1,11 @@
 {% extends "index.html" %}
   {% block title %}Login{% endblock %}
   {% block content %}
+  <div id="registered">
+    {% if registered == True %}
+    Congrats - you have registered for Blank Library. Login with your new credentials below.
+    {% endif %}
+  </div>
     <form method="post">
       <div class="form-group">
         <label for="username">Username</label>

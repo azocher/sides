@@ -1,20 +1,25 @@
 {% extends "index.html" %}
   {% block title %}Login{% endblock %}
   {% block content %}
+    <div id="error">
+      {% if error == True %}
+        Username already registered. Please try again, or <a href="{{ url_for('login', filename='login.html') }}">Login here.</a>
+      {% endif %}
+    </div>
     <h2>New to the Library? Register here.</h2>
-    <form>
+    <form method="post">
       <div class="form-group">
         <label for="username">Username</label>
-        <input type="username" class="form-control" placeholder="Username">
+        <input type="username" class="form-control" placeholder="Username" name="username">
       </div>
       <div class="form-group">
         <label for="password">Password</label>
-        <input type="password" class="form-control" placeholder="Password">
+        <input type="password" class="form-control" placeholder="Password" name="password">
       </div>
       <button type="submit" class="btn btn-primary">Submit</button>
     </form>
     <br>
       <dl>
-        <dt>Already belong? <a href="{{ url_for('login', filename='login.html') }}">Login here.</dt>
+        <dt>Already belong? <a href="{{ url_for('login', filename='login.html') }}">Login here.</a></dt>
       </dl>
   {% endblock %}
