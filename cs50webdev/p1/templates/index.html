@@ -8,12 +8,17 @@
   <body>
     <div class="container-fluid">
       <div class="row" id="header">
-        <div class="col-3">
+        <div class="col-3 align-self-center">
           Blank Library
         </div>
-        <div class="col-3">
+        <div class="col-5">
         </div>
-        <div class="col-3">
+        <div class="col-1 align-self-center" id="menu">
+          {% if 'username' in session %}
+          <a href="{{ url_for('logout',filename='logout.html')}}">logout</a>
+          {% else %}
+          <a href="{{ url_for('login',filename='login.html')}}">LOGIN</a>
+          {% endif %}
         </div>
       </div>
       <div class="row" id="content">
