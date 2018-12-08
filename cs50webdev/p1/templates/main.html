@@ -1,5 +1,31 @@
 {% extends "index.html" %}
   {% block title %}Login{% endblock %}
   {% block content %}
-    TODO: Main
+  <h6>Input Search Criteria for Book</h6>
+  <form method="post" class="form-inline">
+    <div class="form-group mb-2">
+      <select class="form-control" id="type" name="type">
+        <option>ISBN</option>
+        <option>Title</option>
+        <option>Author</option>
+      </select>
+    </div>
+    <div class="form-group mx-sm-3 mb-2">
+      <input type="text" class="form-control" name="input">
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+  </form>
+  <div id="results">
+    {% if results != '' %}
+      <ul>
+      {% for line in results %}
+        <li>
+          <a href="#">{{ line['title'] }}</a><br>
+          {{ line['author'] }}<br>
+          {{ line['isbn'] }}
+        </li>
+      {% endfor %}
+      </ul>
+    {% endif %}
+  </div>
   {% endblock %}

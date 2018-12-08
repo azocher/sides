@@ -29,12 +29,19 @@ def index():
     if request.method == 'GET':
         return render_template('main.html')
     else:
-        return "TODO: Return POST on Index/Main"
+        # collect inputs
+        type = str(request.form.get("type")).lower()
+        input = str(request.form.get("input"))
+
+        # search for type criteria in db
+        statement = "SELECT * FROM books WHERE " + type + " = :input"
+        results = db.execute(statement, {"input": input}).fetchall()
+        print(len(results))
+        return render_template('main.html', results=results)
 
 @app.route("/login", methods=['GET', 'POST'])
 def login():
     if request.method == 'POST':
-        print("Posted!")
         username = str(request.form.get("username"))
         password = str(request.form.get("password"))
         return login_check(db, username, password)
@@ -44,7 +51,6 @@ def login():
 @app.route("/register", methods=['GET', 'POST'])
 def register():
     if request.method == 'POST':
-        print("POSTED!")
         username = str(request.form.get("username"))
         password = str(request.form.get("password"))
         return register_check(db, username, password)

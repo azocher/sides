@@ -8,12 +8,14 @@
   <body>
     <div class="container-fluid">
       <div class="row" id="header">
+        <div class="col-1">
+        </div>
         <div class="col-3 align-self-center">
           Blank Library
         </div>
-        <div class="col-5">
+        <div class="col-4">
         </div>
-        <div class="col-1 align-self-center" id="menu">
+        <div class="col align-self-center" id="menu">
           {% if 'username' in session %}
           <a href="{{ url_for('logout',filename='logout.html')}}">logout</a>
           {% else %}
