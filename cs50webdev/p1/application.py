@@ -31,10 +31,10 @@ def index():
     else:
         # collect inputs
         type = str(request.form.get("type")).lower()
-        input = str(request.form.get("input"))
+        input = "%" + str(request.form.get("input")) + "%"
 
         # search for type criteria in db
-        statement = "SELECT * FROM books WHERE " + type + " = :input"
+        statement = "SELECT * FROM books WHERE " + type + " LIKE :input"
         results = db.execute(statement, {"input": input}).fetchall()
         print(len(results))
         return render_template('main.html', results=results)
