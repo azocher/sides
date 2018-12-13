@@ -20,7 +20,7 @@
       <ul>
       {% for line in results %}
         <li>
-          <a href="#">{{ line['title'] }}</a><br>
+          <a href="{{ url_for('book', isbn=line['isbn']) }}">{{ line['title'] }}</a><br>
           {{ line['author'] }}<br>
           {{ line['isbn'] }}
         </li>

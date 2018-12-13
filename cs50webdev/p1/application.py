@@ -36,8 +36,14 @@ def index():
         # search for type criteria in db
         statement = "SELECT * FROM books WHERE " + type + " LIKE :input"
         results = db.execute(statement, {"input": input}).fetchall()
-        print(len(results))
         return render_template('main.html', results=results)
+
+@app.route("/book/<isbn>")
+def book(isbn):
+    info = db.execute("SELECT author, title FROM books WHERE isbn = :isbn", {"isbn" : isbn}).first()
+    title = info['title']
+    author = info['author']
+    return render_template('book.html', title=title, author=author)
 
 @app.route("/login", methods=['GET', 'POST'])
 def login():
