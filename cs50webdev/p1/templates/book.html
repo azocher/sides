@@ -1,6 +1,69 @@
-{% extends "index.html" %}
-  {% block title %}{{ title }} - {{ author }}{% endblock %}
-  {% block content %}
-    {{ title }}<br>
-    {{ author }}
-  {% endblock %}
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>BOOK: {{ title }} - {{ author }}</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" integrity="sha384-gfdkjb5BdAXd+lj+gudLWI+BXq4IuLW5IT+brZEZsLFm++aCMlF1V92rMkPaX4PP" crossorigin="anonymous">
+    <link rel="stylesheet" href="{{ url_for('static',filename='style.css')}}" type="text/css">
+  </head>
+  <body>
+    <div class="container-fluid" id="book_page">
+      <div class="row" id="header">
+        <div class="col-1">
+        </div>
+        <div class="col-3 align-self-center">
+          Blank Library
+        </div>
+        <div class="col-4">
+        </div>
+        <div class="col align-self-center" id="menu">
+          {% if 'username' in session %}
+          <a href="{{ url_for('logout',filename='logout.html')}}">logout</a>
+          {% else %}
+          <a href="{{ url_for('login',filename='login.html')}}">LOGIN</a>
+          {% endif %}
+        </div>
+      </div>
+      <div class="row" id="book_data">
+        <div class="col-1">
+        </div>
+        <div class="col-6">
+          <div class="font-weight-bold" id="go_back_link">
+            <a onclick="history.back()"><-- go back</a>
+          </div>
+          <div id="title">
+            <span id="title">{{ title }}</span>, {{ year }}
+          </div>
+          <div id="author">
+            {{ author }}
+          </div>
+          <div id="isbn">
+            {{ isbn }}
+          </div>
+          <div id="star_rating">
+          </div>
+          <div id="num_of_ratings">
+          </div>
+        </div>
+        <div class="col-4">
+          <img src="{{ cover_img }}" id="book_cover_img">
+        </div>
+        <div class="col-1">
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-1">
+        </div>
+        <div class="col-6">
+          TODO: review title variable
+          TODO: stars from user
+          TODO: text of review
+        </div>
+        <div class="col-4">
+        </div>
+        <div class="col-1">
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

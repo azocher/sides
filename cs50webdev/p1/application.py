@@ -1,6 +1,6 @@
 import os
 
-from flask import Flask, session, render_template, request
+from flask import Flask, session, render_template, request, redirect, url_for
 from flask_session import Session
 from sqlalchemy import create_engine
 from sqlalchemy.orm import scoped_session, sessionmaker
@@ -27,7 +27,10 @@ db = scoped_session(sessionmaker(bind=engine))
 @app.route("/", methods=['GET', 'POST'])
 def index():
     if request.method == 'GET':
-        return render_template('main.html')
+        if 'username' in session:
+            return render_template('main.html')
+        else:
+            return redirect(url_for('login'))
     else:
         # collect inputs
         type = str(request.form.get("type")).lower()
@@ -40,10 +43,12 @@ def index():
 
 @app.route("/book/<isbn>")
 def book(isbn):
-    info = db.execute("SELECT author, title FROM books WHERE isbn = :isbn", {"isbn" : isbn}).first()
+    info = db.execute("SELECT author, title, year FROM books WHERE isbn = :isbn", {"isbn" : isbn}).first()
     title = info['title']
     author = info['author']
-    return render_template('book.html', title=title, author=author)
+    year = info['year']
+    cover_img="http://covers.openlibrary.org/b/isbn/" + isbn + "-L.jpg"
+    return render_template('book.html', title=title, author=author, cover_img=cover_img, year=year)
 
 @app.route("/login", methods=['GET', 'POST'])
 def login():

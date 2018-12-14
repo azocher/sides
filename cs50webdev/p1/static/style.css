@@ -24,3 +24,21 @@
 #menu {
   text-align: right;
 }
+
+#book_page #book_data {
+  margin-top: 20px;
+}
+
+#go_back_link {
+  margin-bottom: 10px;
+}
+
+#go_back_link:hover {
+  color: blue;
+  text-decoration: underline;
+}
+
+#title {
+  font-size: 18px;
+  font-weight: 600;
+}
