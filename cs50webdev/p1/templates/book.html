@@ -55,17 +55,32 @@
         <div class="col-1">
         </div>
       </div>
-      <div class="row">
+      <div class="row" id="reviews">
         <div class="col-1">
         </div>
-        <div class="col-6">
-          TODO: review title variable
-          TODO: stars from user
-          TODO: text of review
+        <div class="col-8">
+          {% if offer == true %}
+            <div id="offer">
+              <h6>Want to leave a review?</h6>
+              <form class="form-group" method="post">
+                <label>Rating:</label><input type="number" min=0 max=5 name="rating">
+                <input type="text" placeholder="Title" name="title">
+                <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="Review text" name="review"></textarea>
+                <button type="submit" class="btn btn-primary">Submit</button>
+              </form>
+            </div>
+          {% endif %}
+          {% for review in reviews %}
+            <div class="review">
+              <h6>{{ review[3] }}</h6>
+              Rating: {{ review[2] }}
+              <p>
+                {{ review[4] }}
+              </p>
+            </div>
+          {% endfor %}
         </div>
-        <div class="col-4">
-        </div>
-        <div class="col-1">
+        <div class="col-3">
         </div>
       </div>
     </div>
