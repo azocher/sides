@@ -1,4 +1,4 @@
-import os
+import os, requests
 
 from flask import Flask, session, render_template, request, redirect, url_for
 from flask_session import Session
@@ -7,6 +7,7 @@ from sqlalchemy.orm import scoped_session, sessionmaker
 
 # personal functions
 from login import login_check, register_check
+from stars import star_rating
 
 app = Flask(__name__)
 
@@ -43,12 +44,22 @@ def index():
 
 @app.route("/book/<isbn>")
 def book(isbn):
+
+    # Goodreads API call
+    key = os.getenv("API_KEY")
+    res = requests.get("https://www.goodreads.com/book/review_counts.json", params={"key": key, "isbns": isbn})
+    data = res.json()
+    rating = data["books"][0]["average_rating"]
+    count = data["books"][0]["work_text_reviews_count"]
+    stars = star_rating(rating)
+
+    # make isbn call to books.csv
     info = db.execute("SELECT author, title, year FROM books WHERE isbn = :isbn", {"isbn" : isbn}).first()
     title = info['title']
     author = info['author']
     year = info['year']
-    cover_img="http://covers.openlibrary.org/b/isbn/" + isbn + "-L.jpg"
-    return render_template('book.html', title=title, author=author, cover_img=cover_img, year=year)
+    cover_img="http://covers.openlibrary.org/b/isbn/" + isbn + "-M.jpg"
+    return render_template('book.html', title=title, author=author, cover_img=cover_img, year=year, stars=stars, count=count)
 
 @app.route("/login", methods=['GET', 'POST'])
 def login():

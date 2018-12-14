@@ -41,8 +41,12 @@
             {{ isbn }}
           </div>
           <div id="star_rating">
+            {% for star in stars %}
+              <i class='{{ star }}'></i>
+            {% endfor %}
           </div>
           <div id="num_of_ratings">
+            # of Reviews: {{ count }}
           </div>
         </div>
         <div class="col-4">
