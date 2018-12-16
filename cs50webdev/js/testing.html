@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>TESTING</title>
+    <script>
+      let count = 0;
+      function plus_one() {
+        count++;
+        document.querySelector('#count').innerHTML = count;
+
+        if (count === 10) {
+          alert(`Counter is at ${count}! Congrats!`);
+        }
+      }
+    </script>
+  </head>
+  <body>
+    <div id="count">0</div>
+    <button onclick="plus_one()">Plus One</button>
+  </body>
+</html>

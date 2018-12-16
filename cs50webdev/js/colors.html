@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>TESTING</title>
+    <script>
+      function change_color(elem) {
+        console.log(elem);
+        var color = elem.innerText;
+        document.body.style.backgroundColor = color;
+        }
+    </script>
+  </head>
+  <body>
+    Click buttons below to select background color.
+    <button onclick="change_color(this)">Blue</button>
+    <button onclick="change_color(this)">Red</button>
+    <button onclick="change_color(this)">Yellow</button>
+  </body>
+</html>
