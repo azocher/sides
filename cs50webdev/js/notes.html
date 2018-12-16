@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>TESTING</title>
+    <script>
+        function add_note() {
+          var note = document.querySelector('textarea').innerHTML;
+          console.log(note)
+          document.querySelector('#notes').innerHTML = note;
+
+          // stop form from submitting
+          return false;
+        }
+    </script>
+  </head>
+  <body>
+    <div id="notes">
+      Testing
+    </div>
+    <textarea name="name" rows="8" cols="80"></textarea>
+    <br>
+    <button onclick="add_note()">Submit</button>
+  </body>
+</html>
