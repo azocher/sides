@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Flack Chat</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css?family=Raleway:100i,400|Roboto+Condensed|Staatliches" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static',filename='style.css')}}" type="text/css">
+  </head>
+  <body>
+    <div class="content">
+      <div class="row" id="header">
+        <div class="col">
+        </div>
+        <div class="col-3 self-align-center">
+          <h1>Flack</h1>
+          <h3>chat</h3>
+        </div>
+        <div class="col">
+        </div>
+      </div>
+      <div class="row" id="main">
+        <div class="col">
+        </div>
+        <div class="col-5-auto self-align-center">
+          <form id="signin">
+            <div class="form-g">
+              <label>screename central</label>
+              <input type="text" placeholder="sn plz">
+            </div>
+            <div class="form-g">
+              <label>pick an avatar</label>
+              <div id="emoji_menu">
+                <div class="emoji" id="fire">
+                  &#128293;
+                </div>
+                <div class="emoji" id="unicorn">
+                  &#129412;
+                </div>
+                <div class="emoji" id="bento">
+                 &#127857;
+                </div>
+                <div class="emoji" id="pingpong">
+                 &#127955;
+                </div>
+                <div class="emoji" id="scooter">
+                 &#128756
+                </div>
+                <div class="emoji" id="mountain">
+                 &#127956;
+                </div>
+                <div class="emoji" id="party">
+                 &#127881;
+                </div>
+                <div class="emoji" id="smiles">
+                &#128522;
+                </div>
+              </div>
+            </div>
+            <div>
+              <button>GO</button>
+            </div>
+        </div>
+        <div class="col">
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
