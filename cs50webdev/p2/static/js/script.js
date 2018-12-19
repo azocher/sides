@@ -10,8 +10,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // on go button click set sn
     document.querySelector('#go').onclick = function() {
+        console.log("clicked!");
         var sn = document.querySelector('#sn_input').value;
+        var avatar = document.querySelector('input[type=checkbox]:checked').value;
+        console.log(avatar);
         localStorage.setItem('screename', sn);
+        localStorage.setItem('avatar', avatar);
         div_style.display = "hidden";
     };
   };

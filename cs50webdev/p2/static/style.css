@@ -41,12 +41,22 @@ h3 {
   display: inline;
 }
 
+#emoji_menu input[type=checkbox] {
+  display: none;
+}
+
+#emoji_menu input[type=checkbox]:checked + .emoji {
+  background-color: #d3d3d3;
+  border: 1px solid #a8a8a8;
+}
+
 .emoji {
-  display: inline;
-  width: 50px;
-  height: 50px;
+  display: inline-block;
+  width: 20px;
+  height: 20px;
   background-color: #a8a8a8;
   padding: 1px;
+  text-align: center;
 }
 
 .emoji:hover {
