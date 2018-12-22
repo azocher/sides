@@ -4,16 +4,12 @@ from flask import Flask, render_template
 app = Flask(__name__)
 
 # global variables
-chan = ['test']
+channel_list = ['test', 'another test']
 
 @app.route('/')
 def index():
     return render_template('index.html')
 
-@app.route('/flack')
+@app.route('/channels', methods=['GET'])
 def channels():
-    return render_template('channels.html', chan=chan)
-
-@app.route('/channels/<chnl>')
-def channel(chnl):
-    return render_template('channels.html', chnl=chnl)
+    return jsonify({"channels": channel_list[0]}), status.HTTP_100_CONTINUE
