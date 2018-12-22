@@ -1,10 +1,10 @@
 import os
-from flask import Flask, render_template
+from flask import Flask, render_template, jsonify
 
 app = Flask(__name__)
 
 # global variables
-channel_list = ('test', 'another test')
+channel_list = {1 : 'test', 2 : 'another test'}
 
 @app.route('/')
 def index():
@@ -12,4 +12,4 @@ def index():
 
 @app.route('/channels', methods=['GET'])
 def channels():
-    return channel_list
+    return jsonify(channel_list)

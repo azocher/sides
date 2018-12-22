@@ -23,13 +23,17 @@ document.addEventListener('DOMContentLoaded', () => {
       const request = new XMLHttpRequest();
       request.open('GET', '/channels', true);
 
-      request.onreadystatechange = function() {
+      request.onload= function() {
         var channels = request.response;
-        console.log(typeof channels);
-        document.querySelector('#channel_list').innerText = channels;
-        }
+        var jsoned = JSON.parse(channels);
+        for (var i in jsoned) {
+          var ul = document.getElementById("channel_list");
+          var newli = document.createElement("li");
+          newli.innerHTML = "<a href='#'>" + jsoned[i] + "</a>";
+          ul.appendChild(newli);
+        };
+      };
 
-    request.send();
-    console.log(request);
+      request.send();
   };
 });
