@@ -19,27 +19,17 @@ document.addEventListener('DOMContentLoaded', () => {
         div_style.display = "hidden";
     };
   } else {
-    document.querySelector('#test_button').onclick = function() {
       // make AJAX request for channel_list
       const request = new XMLHttpRequest();
       request.open('GET', '/channels', true);
-      console.log(request);
-      request.onprogress = function() {
-        console.log('LOADING', request.status)
-      }
-      request.onload = function() {
+
+      request.onreadystatechange = function() {
         var channels = request.response;
-        console.log(channels);
+        console.log(typeof channels);
+        document.querySelector('#channel_list').innerText = channels;
+        }
 
-        if (data.success) {
-          document.querySelector('#channel_list').innerHTML = channels;
-        } else {
-          return 404;
-        };
-      };
-
+    request.send();
+    console.log(request);
   };
-};
-
-
 });
