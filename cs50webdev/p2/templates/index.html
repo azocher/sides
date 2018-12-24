@@ -80,8 +80,10 @@
       </div>
     <div id="main_channel_list">
       <div id="channels_menu">
-        <input type=text placeholder="add a channel" id="new_channel">
-        <button id="add_a_channel">+</button>
+        <form id="form_new_channel" name="form_new_channel" method="POST">
+          <input type=text placeholder="add a channel" id="new_channel" name="new_channel">
+          <input type=submit id="add_channel">
+        </form>
         <ul id="channel_list">
         </ul>
       </div>
