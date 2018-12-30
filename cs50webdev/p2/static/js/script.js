@@ -24,7 +24,7 @@ document.addEventListener('DOMContentLoaded', () => {
   } else // load channel list
   {
     const request = new XMLHttpRequest();
-    request.open('POST', '/channels', true);
+    request.open('GET', '/channels', true);
 
     request.onload= function() {
       channels = request.response;
@@ -32,7 +32,7 @@ document.addEventListener('DOMContentLoaded', () => {
       for (var i in jsoned) {
         var ul = document.getElementById("channel_list");
         var newli = document.createElement("li");
-        newli.innerHTML = "<a href='#'>" + jsoned[i] + "</a>";
+        newli.innerHTML = "<a href=\"{{ url_for(\'channel\', channel=jsoned[i]) }}\">" + jsoned[i] + "</a>";
         ul.appendChild(newli);
       };
     };
@@ -57,8 +57,10 @@ document.addEventListener('DOMContentLoaded', () => {
     // make XML request if everything okay
     const req = new XMLHttpRequest();
     req.open('POST', '/add_channel', true);
-    req.send();
-    
+    var data = new_channel;
+    console.log(data);
+    req.send(data);
+
     document.getElementById('new_channel').value = "";
     return false;
   };
