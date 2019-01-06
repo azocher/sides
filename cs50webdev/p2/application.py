@@ -1,7 +1,9 @@
 import os
 from flask import Flask, render_template, jsonify, request
+from flask_socketio import SocketIO, emit
 
 app = Flask(__name__)
+socketio = SocketIO(app)
 
 # global variables
 channel_list = {1 : 'test', 2 : 'another test'}
@@ -23,6 +25,13 @@ def new_channel():
     channel_list[count+1] = new_channel.data
     return 'success!'
 
-@app.route('/channels/<channel>', methods=['GET'])
+@app.route('/channels/channel', methods=['GET'])
 def channel():
     return render_template('channel.html')
+
+@socketio.on("send message")
+def new_message(data):
+    message = data['message']
+    message_sender = data['sn']
+    sender_emoji = data['emoji']
+    emit('message received', {"message": message, "screename": message_sender, "avatar": sender_emoji}, broadcast=True)
