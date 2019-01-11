@@ -25,7 +25,7 @@ document.addEventListener('DOMContentLoaded', () => {
   {
     const request = new XMLHttpRequest();
     request.open('GET', '/channels', true);
-
+    console.log('we be sending this xml request');
     request.onload= function() {
       channels = request.response;
       var jsoned = JSON.parse(channels);

@@ -25,9 +25,9 @@ def new_channel():
     channel_list[count+1] = new_channel.data
     return 'success!'
 
-@app.route('/channels/channel', methods=['GET'])
-def channel():
-    return render_template('channel.html')
+@app.route('/channels/<channel>', methods=['GET'])
+def channel(channel):
+    return render_template('channel.html', channel=channel)
 
 @socketio.on("send message")
 def new_message(data):
