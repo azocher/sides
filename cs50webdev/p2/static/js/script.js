@@ -28,6 +28,8 @@ document.addEventListener('DOMContentLoaded', () => {
     console.log('we be sending this xml request');
     request.onload= function() {
       channels = request.response;
+      console.log(channels)
+      console.log(typeof channels)
       var jsoned = JSON.parse(channels);
       for (var i in jsoned) {
         var ul = document.getElementById("channel_list");
@@ -58,7 +60,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const req = new XMLHttpRequest();
     req.open('POST', '/add_channel', true);
     var data = new_channel;
-    console.log(data);
+    console.log(new_channel);
+    console.log(typeof new_channel);
     req.send(data);
 
     document.getElementById('new_channel').value = "";

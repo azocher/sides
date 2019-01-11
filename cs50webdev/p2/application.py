@@ -14,15 +14,16 @@ def index():
 
 @app.route('/channels', methods=['GET'])
 def channels():
-    return jsonify(channel_list)
+    return jsonify(channel_list);
 
 @app.route('/add_channel', methods=['POST'])
 def new_channel():
     # get new_channel name from API request
-    new_channel = request
+    new_channel = request.data.decode("utf-8")
     # figure out key value for pair
     count = len(channel_list)
-    channel_list[count+1] = new_channel.data
+    channel_list[count+1] = new_channel
+    print(channel_list[count+1])
     return 'success!'
 
 @app.route('/channels/<channel>', methods=['GET'])
