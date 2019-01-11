@@ -34,7 +34,7 @@ document.addEventListener('DOMContentLoaded', () => {
       for (var i in jsoned) {
         var ul = document.getElementById("channel_list");
         var newli = document.createElement("li");
-        newli.innerHTML = "<a href=\"{{ url_for(\'channel\', channel=jsoned[i]) }}\">" + jsoned[i] + "</a>";
+        newli.innerHTML = "<a href=\"\{\{url_for(\'channel\', channel=jsoned[i])\}\}\">" + jsoned[i] + "</a>";
         ul.appendChild(newli);
       };
     };
@@ -65,7 +65,9 @@ document.addEventListener('DOMContentLoaded', () => {
     req.send(data);
 
     document.getElementById('new_channel').value = "";
-    return false;
+    if (req.status === 200) {
+      location.reload(true);
+    };
   };
     // 🚨 end of all DOMContentLoaded logic
 });
