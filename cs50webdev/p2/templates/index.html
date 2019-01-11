@@ -85,6 +85,9 @@
           <input type=submit id="add_channel">
         </form>
         <ul id="channel_list">
+          {% for channel in channels %}
+            <li><a href="{{ url_for('channel', channel=channels[channel]) }}">{{ channels[channel] }}</a></li>
+          {% endfor %}
         </ul>
       </div>
     </div>

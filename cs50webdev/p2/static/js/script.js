@@ -23,22 +23,7 @@ document.addEventListener('DOMContentLoaded', () => {
     };
   } else // load channel list
   {
-    const request = new XMLHttpRequest();
-    request.open('GET', '/channels', true);
-    console.log('we be sending this xml request');
-    request.onload= function() {
-      channels = request.response;
-      console.log(channels)
-      console.log(typeof channels)
-      var jsoned = JSON.parse(channels);
-      for (var i in jsoned) {
-        var ul = document.getElementById("channel_list");
-        var newli = document.createElement("li");
-        newli.innerHTML = "<a href=\"\{\{url_for(\'channel\', channel=jsoned[i])\}\}\">" + jsoned[i] + "</a>";
-        ul.appendChild(newli);
-      };
-    };
-    request.send();
+    // do we need to do anything here? 🚨
   };
 
   // ⚡️ Function to add ability to add channel to channel list page

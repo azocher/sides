@@ -6,11 +6,14 @@ app = Flask(__name__)
 socketio = SocketIO(app)
 
 # global variables
-channel_list = {1 : 'test', 2 : 'another test'}
+channel_list = {
+    1 : 'test',
+    2 : 'another test',
+}
 
 @app.route('/', methods=['GET', 'POST'])
 def index():
-    return render_template('index.html')
+    return render_template('index.html', channels=channel_list)
 
 @app.route('/channels', methods=['GET'])
 def channels():
