@@ -12,6 +12,9 @@
   <body>
     <h1>{{ channel }}</h1>
     <div id="messages_container">
+      {% for message in messages %}
+        <p>{{ message[0] }}{{ message[1] + " - " }}{{ message[2] }}</p>
+      {% endfor %}
     </div>
     <div id="new_message">
       <input type="text" placeholder="Write new message" id="message">

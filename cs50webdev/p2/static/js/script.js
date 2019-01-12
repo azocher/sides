@@ -3,6 +3,13 @@ document.addEventListener('DOMContentLoaded', () => {
   // 🌎 globals
   var channels;
 
+  // 🗒 if user closed last current session on channel, redirect to that channel
+  if (localStorage.getItem("path") != window.location.href) {
+    if (document.referrer != localStorage.getItem("path") || document.referrer != window.location.href) {
+      window.location.replace(localStorage.getItem("path"));
+    };
+  };
+
   // 👩‍💻 check to see if screenname already in existence locally
   if (!localStorage.getItem('screename')) {
 
@@ -47,12 +54,13 @@ document.addEventListener('DOMContentLoaded', () => {
     var data = new_channel;
     console.log(new_channel);
     console.log(typeof new_channel);
+    location.reload(false);
     req.send(data);
-
     document.getElementById('new_channel').value = "";
-    if (req.status === 200) {
-      location.reload(true);
-    };
+    //if (req.status === 200) {
+      //location.reload(true);
+    //};
+    return false;
   };
     // 🚨 end of all DOMContentLoaded logic
 });

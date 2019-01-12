@@ -11,6 +11,11 @@ channel_list = {
     2 : 'another test',
 }
 
+messages = {
+    "test" : [],
+    "another test" : []
+}
+
 @app.route('/', methods=['GET', 'POST'])
 def index():
     return render_template('index.html', channels=channel_list)
@@ -21,21 +26,38 @@ def channels():
 
 @app.route('/add_channel', methods=['POST'])
 def new_channel():
+
     # get new_channel name from API request
     new_channel = request.data.decode("utf-8")
+
     # figure out key value for pair
     count = len(channel_list)
     channel_list[count+1] = new_channel
     print(channel_list[count+1])
+
+    # add channel as empty dict for possible messages
+    messages[new_channel] = []
+
     return 'success!'
 
 @app.route('/channels/<channel>', methods=['GET'])
 def channel(channel):
-    return render_template('channel.html', channel=channel)
+    return render_template('channel.html', channel=channel, messages=messages[channel])
 
 @socketio.on("send message")
 def new_message(data):
+    # get variables from socket message
+    channel = data['channel']
+    print(channel)
     message = data['message']
     message_sender = data['sn']
     sender_emoji = data['emoji']
+
+    # add message to message array for storage
+    messages[channel].append([sender_emoji, message_sender, message])
+
+    # check to see length of message array; delete if >100
+    if (len(messages[channel]) > 100):
+        del messages[channel][0]
+
     emit('message received', {"message": message, "screename": message_sender, "avatar": sender_emoji}, broadcast=True)
