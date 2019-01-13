@@ -3,6 +3,7 @@
   <head>
     <meta charset="utf-8">
     <title>Flack Chat</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.2.0/socket.io.dev.js" rel="javscript" type="text/javascript"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css?family=Raleway:100i,400|Roboto+Condensed|Staatliches" rel="stylesheet">
     <link rel="stylesheet" href="{{ url_for('static',filename='style.css')}}" type="text/css">
@@ -68,9 +69,7 @@
                 </div>
               </div>
               <div>
-                <form>
-                  <button id="go">GO</button>
-                </form>
+                <button id="go">GO</button>
               </div>
             </div>
             <div class="col">
@@ -89,6 +88,12 @@
             <li><a href="{{ url_for('channel', channel=channels[channel]) }}">{{ channels[channel] }}</a></li>
           {% endfor %}
         </ul>
+      </div>
+      <div id="current_users">
+        <h4>Current Online Users:</h4>
+        {% for user in current_users %}
+          <p>{{ current_users[user] }} {{ user }}</p>
+        {% endfor %}
       </div>
     </div>
   </body>

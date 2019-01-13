@@ -16,13 +16,22 @@ messages = {
     "another test" : []
 }
 
+users = {}
+
 @app.route('/', methods=['GET', 'POST'])
 def index():
-    return render_template('index.html', channels=channel_list)
+    return render_template('index.html', channels=channel_list, current_users=users)
 
 @app.route('/channels', methods=['GET'])
 def channels():
     return jsonify(channel_list);
+
+@socketio.on("new user")
+def user_on(data):
+    message_sender = data['sn']
+    sender_emoji = data['emoji']
+    users[message_sender] = sender_emoji
+    emit('login', {"screename": message_sender, "avatar": sender_emoji}, broadcast=True)
 
 @app.route('/add_channel', methods=['POST'])
 def new_channel():
@@ -33,6 +42,7 @@ def new_channel():
     # figure out key value for pair
     count = len(channel_list)
     channel_list[count+1] = new_channel
+    print("Added a new channel!")
     print(channel_list[count+1])
 
     # add channel as empty dict for possible messages
