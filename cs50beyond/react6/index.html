@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>React Test 1</title>
+    <script crossorigin src="https://unpkg.com/react@16/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+  </head>
+  <body>
+    <h1>Tasks</h1>
+    <div id="app">
+    </div>
+
+    <script type="text/babel">
+
+      class App extends React.Component {
+
+        constructor(props) {
+          super(props);
+          this.state = {
+            tasks: ['thing one', 'thing two', 'thing three'],
+            input: ""
+          }
+        }
+
+        render() {
+          return (
+          <div>
+            <ul>
+              {this.state.tasks.map((task, i) =>
+                <li key={i}>
+                  {task}
+                </li>
+            )}
+            </ul>
+            <p>Number of Tasks: {this.state.tasks.length}</p>
+            <div>
+              <input onChange={this.handleChange} value={this.state.input} />
+              <button onClick={this.addTask}>Add Task</button>
+            </div>
+          </div>
+          );
+        };
+
+        handleChange = (event) => {
+          this.setState({
+            input: event.target.value
+          })
+        }
+
+        addTask = () => {
+          this.setState(state => ({
+            tasks: [...state.tasks, state.input],
+            input: ""
+          }))
+        }
+
+      };
+
+
+      ReactDOM.render(<App />, document.querySelector("#app"));
+    </script>
+  </body>
+</html>

@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>React Test 1</title>
+    <script crossorigin src="https://unpkg.com/react@16/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+  </head>
+  <body>
+    <div id="app">
+    </div>
+    <script type="text/babel">
+
+      class App extends React.Component {
+
+        constructor(props) {
+          super(props);
+          this.state = {
+            num1: 1,
+            num2: 2,
+            score: 0,
+            response: "",
+            answer: ""
+          }
+        }
+
+        render() {
+          if (this.state.score >= 5) {
+            return this.renderWin();
+          } else {
+            return this.renderProblem();
+          }
+        }
+
+        renderProblem() {
+          return (
+            <div>
+              <h1>{this.state.num1} + {this.state.num2}</h1>
+              <input onKeyPress={this.inputKeyPress} onChange={this.updateResponse} value={this.state.response} />
+              <div>
+                Score: {this.state.score}
+              </div>
+              <div>
+                {this.state.answer}
+              </div>
+            </div>
+          );
+        }
+
+        renderWin() {
+          return (
+            <h1>Congratulations - you win!</h1>
+          );
+        }
+
+        updateResponse = (event) => {
+          this.setState({
+            response: event.target.value
+          });
+        }
+
+        inputKeyPress = (event) => {
+          if (event.key === "Enter") {
+            if (this.state.num1 + this.state.num2 === parseInt(this.state.response)) {
+              this.setState(state => ({
+                answer: "Correct!",
+                score: state.score + 1,
+                num1: Math.ceil(Math.random() * 10),
+                num2: Math.ceil(Math.random() * 10),
+                response: ""
+              }));
+            } else {
+              this.setState(state => ({
+              answer: "Wrong!",
+              response: ""
+            }));
+          }
+          }
+        }
+      }
+
+      ReactDOM.render(<App />, document.querySelector("#app"));
+    </script>
+  </body>
+</html>
