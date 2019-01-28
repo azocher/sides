@@ -39,7 +39,7 @@ class Item(models.Model):
     toppings = models.ManyToManyField(Toppings, blank=True)
     toppings_class = models.CharField(max_length=9, default="None", blank=True)
     price = models.FloatField(null=True, default=None, blank=True)
-
+    amount = models.PositiveSmallIntegerField(default=1)
 
     def __str__(self):
         return f'{self.size}, {self.type} ordered. Will cost {self.price}.'
