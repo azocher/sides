@@ -8,6 +8,7 @@
     <style>
       .complete {
         text-decoration: line-through;
+        color: blue;
       }
     </style>
   </head>
@@ -24,21 +25,23 @@
           super(props);
           this.state = {
             tasks: [],
-            input: ""
+            input: "",
+            selectedItem: null
           }
         }
 
         render() {
+
+
           return (
           <div>
             <ul>
               {this.state.tasks.map((task, i) =>
-                <li onClick={this.completeTask} key={i}>
+                (<li className={this.state.selectedItem == i ? 'complete' : ''} onClick={() => this.completeTask(i)} key={i}>
                   {task}
-                </li>
-            )}
+                </li>)
+              )}
             </ul>
-            <p>Number of Tasks: {this.state.tasks.length}</p>
             <div>
               <input onChange={this.handleChange} value={this.state.input} />
               <button onClick={this.addTask}>Add Task</button>
@@ -60,14 +63,14 @@
           }))
         }
 
-        completeTask = () => {
-          this.setState(state => ({
-
-          }))
+        completeTask = (i) => {
+          return (
+            this.setState({
+              selectedItem: i
+            }));
         }
 
       };
-
 
       ReactDOM.render(<App />, document.querySelector("#app"));
     </script>

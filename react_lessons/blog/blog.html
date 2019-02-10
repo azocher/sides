@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>React Test 1</title>
+    <title>Blog Example</title>
     <script crossorigin src="https://unpkg.com/react@16/umd/react.development.js"></script>
     <script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
     <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
@@ -16,26 +16,17 @@
         constructor(props) {
           super(props);
           this.state = {
-            num1: 1,
-            num2: 2,
-            score: 0,
-            response: ""
+            comments: ['test', 'test2']
           }
         }
 
         render() {
           return (
-            <div>
-              <h1>{this.state.num1} + {this.state.num2}</h1>
-              <input onChange= {this.updateResponse} value={this.state.response} />
-            </div>
+          <div>
+            <h3>Comments</h3>
+            <p>{this.state.comments}</p>
+          </div>
           );
-        }
-
-        updateResponse = (event) => {
-          this.setState({
-            response: event.target.value
-          })
         }
       }
 
