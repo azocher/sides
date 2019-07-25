@@ -61,3 +61,40 @@ def get_item():
     return response
 
 @app.route('/item/update', methods=['PUT'])
+def update_status():
+    # get item from POST body
+    req_data = request.get_json()
+    item = req_data['item']
+    status = req_data['status']
+
+    # Update item in the add_to_list
+    res_data = helper.update_status(item, status)
+
+    # return error if status was not actually updated
+    if res_data is None:
+        response = Response("{'error': 'Error updating item - '" + item + ", " + status + "}", status=400, mimetype='application/json')
+        return response
+
+    # return response
+    response = Response(json.dumps(res_data), mimetype='application/json')
+
+    return response
+
+@app.route('/item/remove', methods=['DELETE'])
+def delete_item():
+    # Get item from the POST body
+    req_data = request.get_json()
+    item = req_data['item']
+
+    # Delete item from the list
+    res_data = helper.delete_item(item)
+
+    # Return error if the item could not be deleted
+    if res_data is None:
+        response = Response("{'error': 'Error deleting item - '" + item + "}", status=400, mimetype='application/json')
+        return Response
+
+    response = Response(json.dumps(res_data), mimetype='application/json')
+    print(response)
+
+    return response
